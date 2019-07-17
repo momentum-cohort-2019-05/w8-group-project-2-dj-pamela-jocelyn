@@ -11,7 +11,7 @@ class Question(models.Model):
 
     def __str__(self):
         """    """
-        return self.body
+        return self.title
 
 class Answer(models.Model):
     """      """
