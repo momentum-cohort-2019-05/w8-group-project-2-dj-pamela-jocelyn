@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{{question}}
+
+{% for answer in question.answer_set.all %}
+
+{{answer}}
+
+
+{% endfor %}
+
+
+
+
+{% endblock %}

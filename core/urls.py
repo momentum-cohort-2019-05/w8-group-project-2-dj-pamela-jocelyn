@@ -3,4 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('questions/<int:pk>', views.question_detail, name='question_detail'),
 ]
+
