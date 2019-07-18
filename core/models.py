@@ -22,10 +22,17 @@ class Answer(models.Model):
     body = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     question = models.ForeignKey(Question,on_delete=models.CASCADE)
+    correct = models.BooleanField(default=False)
 
     def __str__(self):
         """   """
         return self.body
+
+    def to_dict(self):
+        return {
+            'body': self.body,
+            'correct': self.correct
+        }
 
         
 

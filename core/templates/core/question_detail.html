@@ -19,6 +19,11 @@
             {% for answer in question.answer_set.all %}
                 <li>
                     {{ answer.body }}
+                    {% if not answer.correct %}
+                        <a class="mark-answer-correct-link" data-answer-pk="{{ answer.pk }}" href="{% url 'answer_correct' answer.pk %}">mark as correct</a>
+                    {% else %}
+                        <p>answer marked as correct</p>
+                    {% endif %}
                 </li>
             {% endfor %}
         </ul>
