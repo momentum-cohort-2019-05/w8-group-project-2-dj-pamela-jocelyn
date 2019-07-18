@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from core.models import Question
-from core.forms import QuestionForm
+from core.models import Question, Answer
+from core.forms import QuestionForm, AnswerForm
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -36,7 +36,7 @@ def question_create(request):
                 user = request.user
 
             )
-        question.save()
+            question.save()
         return HttpResponseRedirect(reverse_lazy('question_detail',kwargs =
         {'pk':question.pk}))
     else:
@@ -46,3 +46,30 @@ def question_create(request):
     }
 
     return render(request, 'core/question_create.html', context)
+
+
+@login_required
+def answer_create(request, pk):
+    question = Question.objects.get(pk=pk)
+    if request.method == 'POST':
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            answer = Answer (
+                question = question,   
+                body = form.cleaned_data['body'],
+                user = request.user)
+            answer.save()
+            return HttpResponseRedirect(reverse_lazy('question_detail',kwargs ={'pk':question.pk}))
+    else:
+        form = AnswerForm()
+    context = {
+        'form': form
+    }
+
+    return render(request, 'core/answer_create.html', context)
+
+
+
+
+
+
