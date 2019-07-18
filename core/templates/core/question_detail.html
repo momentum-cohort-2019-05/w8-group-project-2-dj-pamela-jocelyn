@@ -15,18 +15,22 @@
     {% endif %}
 
     {% if question.answer_set.all %}
-        <ul>
-            {% for answer in question.answer_set.all %}
-                <li>
+        {% for answer in question.answer_set.all %}
+            <hr>
+            <div>
+                {{ answer.user.username }}:
+                <p>
                     {{ answer.body }}
+                </p>
+                {% if question.user == request.user %}
                     {% if not answer.correct %}
                         <a class="mark-answer-correct-link" data-answer-pk="{{ answer.pk }}" href="{% url 'answer_correct' answer.pk %}">mark as correct</a>
                     {% else %}
-                        <p>answer marked as correct</p>
+                        <span>answer marked as correct</span>
                     {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
+                {% endif %}
+            </div>
+        {% endfor %}
     {% else %}
         <p>no answers yet!</p>
     {% endif %}

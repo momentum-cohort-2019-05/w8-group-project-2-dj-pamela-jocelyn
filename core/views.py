@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponseForbidden
 from django.urls import reverse_lazy
 from core.models import Question, Answer
 from core.forms import QuestionForm, AnswerForm
@@ -72,7 +72,8 @@ def answer_create(request, pk):
 def answer_correct(request, pk):
     answer = Answer.objects.get(pk=pk)
 
-    answer.correct = True
-    answer.save()
+    if request.user == answer.question.user:
+        answer.correct = True
+        answer.save()
 
-    return JsonResponse(answer.to_dict())
+        return JsonResponse(answer.to_dict())
