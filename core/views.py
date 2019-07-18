@@ -5,8 +5,6 @@ from core.models import Question
 from core.forms import QuestionForm
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-
 def index(request):
     questions = Question.objects.all()
 
@@ -16,6 +14,7 @@ def index(request):
 
     return render(request, 'index.html', context)
 
+
 def question_detail(request, pk):
     question = Question.objects.get(pk=pk)
 
@@ -24,6 +23,7 @@ def question_detail(request, pk):
     }
 
     return render(request, 'core/question_detail.html', context)
+
 
 @login_required
 def question_create(request):
@@ -45,12 +45,4 @@ def question_create(request):
         'form': form
     }
 
-
     return render(request, 'core/question_create.html', context)
-
-
-    
-
-
-
-

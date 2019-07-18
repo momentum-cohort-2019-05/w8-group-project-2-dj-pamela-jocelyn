@@ -1,17 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <h1>{{ question.title }}</h1>
+    <p>
+        by {{ question.user.username }}
+    </p>
+    <p>
+        {{ question.body }}
+    </p>
 
-{{question}}
+    <h2>Answers</h2>
+    {% if request.user.is_authenticated %}
+        <a href="">write an answer</a>
+    {% endif %}
 
-{% for answer in question.answer_set.all %}
-
-{{answer}}
-
-
-{% endfor %}
-
-
-
-
+    {% if question.answer_set.all %}
+        <ul>
+            {% for answer in question.answer_set.all %}
+                <li>
+                    {{ answer.body }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>no answers yet!</p>
+    {% endif %}
 {% endblock %}
