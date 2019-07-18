@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Stack Box</title>
 </head>
 <body>
-    <header> Stack Box </header>
-    {% block content %}
-    
-    
-    
-    {% endblock%}
+    <header>
+        <a href="{% url 'index' %}">Stack Box</a>
+    </header>
+    <ul>
+        {% if request.user.is_authenticated %}
+            <li>{{ user.username }}</li>
+            <li><a href="{% url 'auth_logout' %}?next={{request.path}}">Logout</a></li>   
+        {% else %}
+            <li><a href="{% url 'auth_login' %}?next={{request.path}}">Login</a></li>
+            <li><a href="{% url 'registration_register' %}">Register</a> </li>
+        {% endif %} 
+    </ul>
+    {% block content %}{% endblock%}
 </body>
 </html>
