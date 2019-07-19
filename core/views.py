@@ -90,4 +90,17 @@ def question_star(request, pk):
 
         return JsonResponse(question.to_dict())
 
+@login_required
+def user_profile(request):
+        questionstars = QuestionStar.objects.filter(user=request.user)
+        answerstars = AnswerStar.objects.filter(user=request.user)
+        questions = Question.objects.filter(user=request.user)
+        context = {
+            'questionstars': questionstars,
+            'answerstars': answerstars,
+            'questions': questions
+        }
+        return render(request, 'core/user_profile.html', context)
+
+
 

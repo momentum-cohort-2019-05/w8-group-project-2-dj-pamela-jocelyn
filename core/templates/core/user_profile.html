@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+​
+{% block content %}
+  <h1>Welcome {{request.user.username}}</h1>
+{% if questions%}
+    <h2>Questions Asked</h2>
+    {% for question in questions%}
+    {{question.title}}
+    {%endfor%}
+{%endif%}
+
+
+
+  {% if questionstars %}
+  <h2>Starred Questions</h2>
+    {% for questionstar in questionstars%}
+    {{questionstar.question.title}}
+    {{questionstar.question.body}}
+    {% endfor%}
+  {% endif%}
+
+{% if answerstars %}
+  <h2>Starred Answers</h2>
+    {% for answerstar in answerstars%}
+    {{answerstar.answer.body}}
+    
+    {% endfor%}
+  {% endif%}
+{% endblock %}
