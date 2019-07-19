@@ -18,3 +18,28 @@ if (markAnswerCorrectLinks) {
         });
     }
 }
+
+
+const starAnswerLinks = document.querySelectorAll('.star-answer-link');
+
+if (starAnswerLinks) {
+    for (let link of starAnswerLinks) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            fetch(`/answers/${link.dataset.answerPk}/star`)
+                .then(res => res.json())
+                .then(function (data) {
+                    console.log('data', data);
+                })
+                .then(function () {
+                    link.setAttribute('hidden', true);
+                    let starMessage = document.createElement('span');
+                    starMessage.innerText = 'answer starred';
+                    link.parentElement.appendChild(starMessage);
+                });
+        });
+    }
+}
+
+
+
