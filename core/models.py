@@ -18,6 +18,12 @@ class Question(models.Model):
         """    """
         return self.title
 
+    def to_dict(self):
+        return {
+            'body': self.body,
+            'title': self.title
+        }
+
 class Answer(models.Model):
     """      """
     body = models.TextField()
@@ -40,6 +46,7 @@ class QuestionStar(models.Model):
     """  """
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
 
 

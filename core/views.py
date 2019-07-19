@@ -88,4 +88,6 @@ def question_star(request, pk):
         question = Question.objects.get(pk=pk)
         question.questionstars.add(request.user)
 
+        return JsonResponse(question.to_dict())
+
 
