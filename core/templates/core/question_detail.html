@@ -29,6 +29,10 @@
                         <span>answer marked as correct</span>
                     {% endif %}
                 {% endif %}
+                {% if request.user.is_authenticated %}
+                  <a class="star-answer-link" data-answer-pk="{{answer.pk}}" href="{% url 'answer_star' answer.pk %}"> star </a> 
+
+                {% endif %}
             </div>
         {% endfor %}
     {% else %}

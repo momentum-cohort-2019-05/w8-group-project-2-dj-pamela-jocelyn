@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponseForbidden
 from django.urls import reverse_lazy
-from core.models import Question, Answer
+from core.models import Question, Answer, QuestionStar, AnswerStar
 from core.forms import QuestionForm, AnswerForm
 from django.contrib.auth.decorators import login_required
 
@@ -77,3 +77,15 @@ def answer_correct(request, pk):
         answer.save()
 
         return JsonResponse(answer.to_dict())
+
+def answer_star(request, pk):
+        answer = Answer.objects.get(pk=pk)
+        answer.answerstars.add(request.user)
+
+        return JsonResponse(answer.to_dict())
+
+def question_star(request, pk):
+        question = Question.objects.get(pk=pk)
+        question.questionstars.add(request.user)
+
+
