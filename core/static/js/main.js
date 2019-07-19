@@ -41,5 +41,24 @@ if (starAnswerLinks) {
     }
 }
 
+const starQuestionLinks = document.querySelectorAll('.star-question-link');
 
+if (starQuestionLinks) {
+    for (let link of starQuestionLinks) {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            fetch(`/questions/${link.dataset.questionPk}/star`)
+                .then(res => res.json())
+                .then(function (data) {
+                    console.log('data', data);
+                })
+                .then(function () {
+                    link.setAttribute('hidden', true);
+                    let starMessage = document.createElement('span');
+                    starMessage.innerText = 'question starred';
+                    link.parentElement.appendChild(starMessage);
+                });
+        });
+    }
+}
 

@@ -5,6 +5,12 @@
     <p>
         by {{ question.user.username }}
     </p>
+    <div>
+        {% if request.user.is_authenticated %}
+            <a class="star-question-link" data-question-pk="{{question.pk}}" href="{% url 'question_star' question.pk %}"> star </a> 
+
+        {% endif %} 
+    </div>
     <p>
         {{ question.body }}
     </p>
