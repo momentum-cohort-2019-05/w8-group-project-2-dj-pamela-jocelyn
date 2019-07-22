@@ -1,29 +1,42 @@
 {% extends "base.html" %}
 ​
 {% block content %}
-  <h1>Welcome {{request.user.username}}</h1>
+  <h1 style="color:white;text-align:center;">Welcome {{request.user.username}}</h1>
 {% if questions%}
-    <h2>Questions Asked</h2>
+
+<div class="bigdiv">
+<div class="qa1"> 
+    <h2 style="text-align:center;">Questions Asked</h2>
     {% for question in questions%}
+    <ul>
     {{question.title}}
+    </ul>
     {%endfor%}
 {%endif%}
+</div>
 
-
-
+<div class="qs2">
   {% if questionstars %}
-  <h2>Starred Questions</h2>
+  <h2 style="text-align:center;">Starred Questions</h2>
     {% for questionstar in questionstars%}
+    <ul>
     {{questionstar.question.title}}
+    </ul>
     {{questionstar.question.body}}
     {% endfor%}
   {% endif%}
+</div>
 
+<div class="as3">
 {% if answerstars %}
-  <h2>Starred Answers</h2>
+  <h2 style="text-align:center;">Starred Answers</h2>
     {% for answerstar in answerstars%}
+  <ul>
     {{answerstar.answer.body}}
-    
+  </ul> 
     {% endfor%}
+ 
   {% endif%}
 {% endblock %}
+</div>
+</div>
