@@ -62,3 +62,29 @@ if (starQuestionLinks) {
     }
 }
 
+const answerInput = document.querySelector('#answer-input');
+const answerButton = document.querySelector('#answer-button');
+const csrftoken = Cookies.get('csrftoken')
+answerButton.addEventListener('click', (e) =>{
+    console.log('test')
+    fetch(`/questions/${answerInput.dataset.questionPk}/answers/create`,{
+        credentials: 'include',
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': csrftoken
+          },
+          body: JSON.stringify({ 'body': answerInput.value })
+        })
+    .then(data => data.json())
+    .then(json => {
+        console.log(json)
+        const answerDiv=  document.querySelector('.answer-detail')
+        answerDiv.innerHTML += `
+        ${ json['user'] }:
+        <p>
+            ${json['body'] }
+        </p>
+        
+    `
+     })
+    });
