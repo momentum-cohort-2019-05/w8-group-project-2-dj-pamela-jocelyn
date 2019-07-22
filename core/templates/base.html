@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+<div class="oxcursor">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {% load static %}
     <script src="{% static 'js/main.js' %}" defer></script>
-    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-    <title>Stack Box</title>
+    <title> Ask Durham: Community </title>
 
 </head>
-<body>
+
+<body class="bodyback">
     <header>
-        <a href="{% url 'index' %}">Stack Box</a>
+        <a href="{% url 'index' %}"> Durham Home </a>
     </header>
     <ul>
         {% if request.user.is_authenticated %}
@@ -25,5 +28,8 @@
         {% endif %} 
     </ul>
     {% block content %}{% endblock%}
+
+
 </body>
+</div>
 </html>
