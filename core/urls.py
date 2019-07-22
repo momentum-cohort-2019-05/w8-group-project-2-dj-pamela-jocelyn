@@ -10,4 +10,5 @@ urlpatterns = [
     path('answers/<int:pk>/star', views.answer_star, name="answer_star"),
     path('questions/<int:pk>/star', views.question_star, name="question_star"),
     path('profile/', views.user_profile, name="my_profile"),
+    path('questions/<int:pk>/delete', views.QuestionDelete.as_view(), name='question_delete'),
 ]

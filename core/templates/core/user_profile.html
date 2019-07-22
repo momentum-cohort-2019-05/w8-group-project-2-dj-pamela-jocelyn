@@ -6,6 +6,9 @@
     <h2>Questions Asked</h2>
     {% for question in questions%}
     {{question.title}}
+    <p>
+      <a href="{% url 'question_delete' question.pk %}">delete this question</a>
+  </p>
     {%endfor%}
 {%endif%}
 
@@ -26,4 +29,6 @@
     
     {% endfor%}
   {% endif%}
-{% endblock %}
+
+{%endblock%}
+

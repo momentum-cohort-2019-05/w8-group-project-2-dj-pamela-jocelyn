@@ -9,3 +9,7 @@ class QuestionForm(forms.Form):
 class AnswerForm(forms.Form):
     body = forms.CharField(max_length=250)
 
+
+#class DeleteForm(forms.Form):
+    #body = forms.CharField(max_length=250)
+
