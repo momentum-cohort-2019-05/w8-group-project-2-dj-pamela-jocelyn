@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect, JsonResponse, HttpResponseForbidde
 from django.urls import reverse_lazy
 from core.models import Question, Answer, QuestionStar, AnswerStar
 from core.forms import QuestionForm, AnswerForm
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 
 def index(request):
@@ -98,9 +99,18 @@ def user_profile(request):
         context = {
             'questionstars': questionstars,
             'answerstars': answerstars,
-            'questions': questions
+            'questions': questions,
+            
+            
         }
         return render(request, 'core/user_profile.html', context)
+
+class QuestionDelete(DeleteView):
+    model = Question
+    success_url =reverse_lazy('my_profile')
+    
+    
+
 
 
 
