@@ -5,6 +5,7 @@ from core.models import Question, Answer, QuestionStar, AnswerStar
 from core.forms import QuestionForm, AnswerForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
+import json
 
 def index(request):
     questions = Question.objects.all()
@@ -52,22 +53,37 @@ def question_create(request):
 @login_required
 def answer_create(request, pk):
     question = Question.objects.get(pk=pk)
-    if request.method == 'POST':
-        form = AnswerForm(request.POST)
-        if form.is_valid():
-            answer = Answer (
-                question = question,   
-                body = form.cleaned_data['body'],
-                user = request.user)
-            answer.save()
-            return HttpResponseRedirect(reverse_lazy('question_detail',kwargs ={'pk':question.pk}))
-    else:
-        form = AnswerForm()
-    context = {
-        'form': form
-    }
+    req_data = json.loads(request.body.decode("UTF-8"))
+    answer = Answer (
+        question = question,   
+        body = req_data['body'],
+        user = request.user)
+    answer.save()
+    return JsonResponse({
+        "body": req_data['body'],
+        "user": answer.user.username
+    })
+      
 
-    return render(request, 'core/answer_create.html', context)
+# @login_required
+# def answer_create(request, pk):
+#     question = Question.objects.get(pk=pk)
+#     if request.method == 'POST':
+#         form = AnswerForm(request.POST)
+#         if form.is_valid():
+#             answer = Answer (
+#                 question = question,   
+#                 body = form.cleaned_data['body'],
+#                 user = request.user)
+#             answer.save()
+#             return HttpResponseRedirect(reverse_lazy('question_detail',kwargs ={'pk':question.pk}))
+#     else:
+#         form = AnswerForm()
+#     context = {
+#         'form': form
+#     }
+
+#     return render(request, 'core/answer_create.html', context)
 
 
 def answer_correct(request, pk):
@@ -109,6 +125,10 @@ class QuestionDelete(DeleteView):
     model = Question
     success_url =reverse_lazy('my_profile')
     
+
+
+
+     
     
 
 
