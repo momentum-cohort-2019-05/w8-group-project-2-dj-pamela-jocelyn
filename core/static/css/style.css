@@ -1,0 +1,101 @@
+.askmaintitle {
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-style: double;
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: .01px;
+    text-shadow:
+       3px 3px 0 white,
+     -1px -1px 0 white,  
+      1px -1px 0 white,
+      -1px 1px 0 white,
+       1px 1px 0 white;
+}
+
+.questiondiv {
+    /* float: center; */
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+    /* background-color: aquamarine; */
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+    font-family: 'Raleway', sans-serif; */ 
+    display: flex;
+    justify-content: right;
+    /* background: pink; */
+}
+
+#qtitle {
+    color: white;
+    text-decoration: underline;
+    text-decoration-style: solid;
+    text-align: center; right;
+    font-size: 30px;
+}
+
+.frontpicturediv {
+    float: left;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+.bodyback {
+    background-image: url(https://pbs.twimg.com/media/D_U5N3iXkAErXDE?format=jpg&name=4096x4096);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* changes the cursor displayed: should change it to something else */
+/* .oxcursor:hover {
+    cursor: url(https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/apple/198/ox_1f402.png), auto;
+} */
+
+.bigdiv {
+    display: flex;
+    justify-content: center;
+    
+}
+
+.qa1 {
+    order: 1;
+    flex-basis: 400px;
+    /* background-color: purple; */
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+}
+
+.qs2 {
+    order: 2;
+    flex-basis: 400px;
+    /* background-color: yellow; */
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+}
+
+.as3 {
+    order: 3;
+    flex-basis: 400px;
+    /* background-color: pink; */
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+}
+
+.bodyinput {
+    float: center;
+}
+

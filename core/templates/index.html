@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Questions</h1>
+    <h1 class="askmaintitle">  Ask Durham   </h1>
+    <div class="frontpicturediv"> 
+            <iframe width="500" height="315" src="https://www.youtube.com/embed/tROD8wlw_l8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+    <div class="questiondiv">
+    <h2 id="qtitle">  Questions:  </h2>
     {% if request.user.is_authenticated %}
         <a href="{% url 'question_create' %}">ask a question</a>
    
 
     {% endif %}
-
+    
     {% if questions %}
         <ul>
             {% for question in questions %}
@@ -16,5 +21,6 @@
                 </li>
             {% endfor %}
         </ul>
+    </div>
     {% endif %}
 {% endblock %}
