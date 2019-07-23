@@ -55,9 +55,9 @@
 }
 
 /* changes the cursor displayed: should change it to something else */
-/* .oxcursor:hover {
+.oxcursor:hover {
     cursor: url(https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/72/apple/198/ox_1f402.png), auto;
-} */
+}
 
 .bigdiv {
     display: flex;
