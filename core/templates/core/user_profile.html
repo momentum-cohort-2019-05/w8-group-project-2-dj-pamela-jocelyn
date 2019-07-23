@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-​
+
 {% block content %}
   <h1 style="color:white;text-align:center;">Welcome {{request.user.username}}</h1>
 {% if questions%}
@@ -11,6 +11,9 @@
     <ul>
     {{question.title}}
     </ul>
+    <p>
+      <a href="{% url 'question_delete' question.pk %}">delete this question</a>
+  </p>
     {%endfor%}
 {%endif%}
 </div>
@@ -37,6 +40,6 @@
     {% endfor%}
  
   {% endif%}
-{% endblock %}
 </div>
 </div>
+{%endblock%}

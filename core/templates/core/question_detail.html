@@ -17,13 +17,15 @@
 
     <h2>Answers</h2>
     {% if request.user.is_authenticated %}
+    <input type="text" id="answer-input" data-question-pk="{{question.pk}}">
+    <button id="answer-button">Submit Answer</button>
         <a href="{% url 'answer_create' question.pk%}" >write an answer</a>
     {% endif %}
 
     {% if question.answer_set.all %}
         {% for answer in question.answer_set.all %}
             <hr>
-            <div>
+            <div class="answer-detail">
                 {{ answer.user.username }}:
                 <p>
                     {{ answer.body }}

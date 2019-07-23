@@ -56,3 +56,4 @@ class AnswerStar(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
+
