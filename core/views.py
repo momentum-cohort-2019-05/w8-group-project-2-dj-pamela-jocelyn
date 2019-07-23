@@ -6,6 +6,8 @@ from core.forms import QuestionForm, AnswerForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 import json
+from django.core.mail import send_mail
+from django.conf import settings
 
 def index(request):
     questions = Question.objects.all()
@@ -59,32 +61,18 @@ def answer_create(request, pk):
         body = req_data['body'],
         user = request.user)
     answer.save()
+    subject = 'Your Question Has Been Answered'
+    message = 'A user answered your question.'
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = [question.user.email]
+    send_mail( subject, message, email_from, recipient_list )
+   
+
+
     return JsonResponse({
         "body": req_data['body'],
         "user": answer.user.username
     })
-      
-
-# @login_required
-# def answer_create(request, pk):
-#     question = Question.objects.get(pk=pk)
-#     if request.method == 'POST':
-#         form = AnswerForm(request.POST)
-#         if form.is_valid():
-#             answer = Answer (
-#                 question = question,   
-#                 body = form.cleaned_data['body'],
-#                 user = request.user)
-#             answer.save()
-#             return HttpResponseRedirect(reverse_lazy('question_detail',kwargs ={'pk':question.pk}))
-#     else:
-#         form = AnswerForm()
-#     context = {
-#         'form': form
-#     }
-
-#     return render(request, 'core/answer_create.html', context)
-
 
 def answer_correct(request, pk):
     answer = Answer.objects.get(pk=pk)
@@ -92,7 +80,7 @@ def answer_correct(request, pk):
     if request.user == answer.question.user:
         answer.correct = True
         answer.save()
-
+        
         return JsonResponse(answer.to_dict())
 
 def answer_star(request, pk):
@@ -125,6 +113,8 @@ class QuestionDelete(DeleteView):
     model = Question
     success_url =reverse_lazy('my_profile')
     
+
+
 
 
 
